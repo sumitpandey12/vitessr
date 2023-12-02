@@ -1,12 +1,10 @@
 import fs from "node:fs/promises";
 import express from "express";
-import { log } from "node:console";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
 const base = process.env.BASE || "/";
-const helmet = Helmet.content;
 
 // Cached production assets
 const templateHtml = isProduction
@@ -63,11 +61,12 @@ app.use("*", async (req, res) => {
     }
 
     const rendered = await render(url, ssrManifest);
+    const pageTitle = "Homepage - Welcome to my page";
 
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? "")
       .replace(`<!--app-html-->`, rendered.html ?? "")
-      .replace(`<head>`, `<head>${metaTag.toString()}`);
+      .replace("__PAGE_META__", `<title>${pageTitle}</title>`);
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   } catch (e) {
