@@ -15,6 +15,10 @@ const Home = () => {
           content="https://images.unsplash.com/photo-1682685796852-aa311b46f50d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
         />
       </Helmet>
+      <head>
+        <title>My React App</title>
+        <meta name="description" content="This is my React app." />
+      </head>
 
       <div>Home</div>
     </div>
