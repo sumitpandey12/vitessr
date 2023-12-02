@@ -66,7 +66,7 @@ app.use("*", async (req, res) => {
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? "")
       .replace(`<!--app-html-->`, rendered.html ?? "")
-      .replace("__PAGE_META__", `<title>${pageTitle}</title>`);
+      .replace(`__PAGE_META__`, `<title>${pageTitle}</title>`);
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   } catch (e) {
