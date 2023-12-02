@@ -66,12 +66,9 @@ app.use("*", async (req, res) => {
     const pageTitle = "Homepage - Welcome to my page";
 
     const html = template
-      .replace(
-        `<!--app-head-->`,
-        rendered.head ?? "<head><title>Page Home</title></head>"
-      )
+      .replace(`<!--app-head-->`, rendered.head ?? "")
       .replace(`<!--app-html-->`, rendered.html ?? "")
-      .replace(`__PAGE_META__`, `<title>${pageTitle}</title>`);
+      .replace(`__PAGE_META__`, `<head>${metaTag}</head>`);
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   } catch (e) {
