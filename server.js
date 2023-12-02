@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import express from "express";
+import { log } from "node:console";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -61,10 +62,14 @@ app.use("*", async (req, res) => {
     }
 
     const rendered = await render(url, ssrManifest);
+    log(rendered);
     const pageTitle = "Homepage - Welcome to my page";
 
     const html = template
-      .replace(`<!--app-head-->`, rendered.head ?? "")
+      .replace(
+        `<!--app-head-->`,
+        rendered.head ?? "<head><title>Page Home</title></head>"
+      )
       .replace(`<!--app-html-->`, rendered.html ?? "")
       .replace(`__PAGE_META__`, `<title>${pageTitle}</title>`);
 
